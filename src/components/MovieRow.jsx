@@ -33,22 +33,6 @@ const MovieRow = ({ title, fetchMovies }) => {
             <div className="movie-info">
               <h3 className="movie-title">{movie.title}</h3>
               <p className="movie-rating">★ {movie.vote_average.toFixed(1)}</p>
-      <div className="row-container">
-        <button className="arrow-btn left" onClick={() => scroll('left')}>
-          <img src={arrowIcon} alt="Scorri sinistra" className="arrow-icon left-arrow" />
-        </button>
-        <div className="row-posters" ref={rowRef}>
-          {movies.map((movie) => (
-            <div key={movie.id} className="movie-card">
-              <img
-                src={`${IMAGE_BASE_URL}${movie.poster_path}`}
-                alt={movie.title}
-                className="movie-poster"
-              />
-              <div className="movie-info">
-                <h3 className="movie-title">{movie.title}</h3>
-                <p className="movie-rating">★ {movie.vote_average.toFixed(1)}</p>
-              </div>
             </div>
           </div>
         ))}
