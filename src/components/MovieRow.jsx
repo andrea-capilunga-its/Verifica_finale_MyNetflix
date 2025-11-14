@@ -1,10 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import './MovieRow.css';
-import arrowIcon from '../assets/img/scroll-arrow-svgrepo-com.svg';
 
 const MovieRow = ({ title, fetchMovies }) => {
   const [movies, setMovies] = useState([]);
-  const rowRef = useRef(null);
 
   useEffect(() => {
     const loadMovies = async () => {
@@ -21,14 +19,20 @@ const MovieRow = ({ title, fetchMovies }) => {
 
   const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
-  const scroll = (direction) => {
-    const scrollAmount = direction === 'left' ? -400 : 400;
-    rowRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-  };
-
   return (
     <div className="movie-row">
       <h2 className="row-title">{title}</h2>
+      <div className="row-posters">
+        {movies.map((movie) => (
+          <div key={movie.id} className="movie-card">
+            <img
+              src={`${IMAGE_BASE_URL}${movie.poster_path}`}
+              alt={movie.title}
+              className="movie-poster"
+            />
+            <div className="movie-info">
+              <h3 className="movie-title">{movie.title}</h3>
+              <p className="movie-rating">★ {movie.vote_average.toFixed(1)}</p>
       <div className="row-container">
         <button className="arrow-btn left" onClick={() => scroll('left')}>
           <img src={arrowIcon} alt="Scorri sinistra" className="arrow-icon left-arrow" />
@@ -46,11 +50,8 @@ const MovieRow = ({ title, fetchMovies }) => {
                 <p className="movie-rating">★ {movie.vote_average.toFixed(1)}</p>
               </div>
             </div>
-          ))}
-        </div>
-        <button className="arrow-btn right" onClick={() => scroll('right')}>
-          <img src={arrowIcon} alt="Scorri destra" className="arrow-icon right-arrow" />
-        </button>
+          </div>
+        ))}
       </div>
     </div>
   );
