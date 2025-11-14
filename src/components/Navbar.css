@@ -5,13 +5,13 @@
   left: 0;
   width: 100%;
   z-index: 1000;
-  padding: 20px 48px;
-  background-color: #000000;
-  transition: background-color 0.3s ease;
+  padding: 12px 48px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 70%, transparent 100%);
+  transition: background 0.3s ease;
 }
 
 .navbar.scrolled {
-  background-color: #000000;
+  background: rgba(0, 0, 0, 0.95);
 }
 
 .navbar-container {
@@ -26,7 +26,7 @@
 .logo {
   display: flex;
   align-items: center;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 900;
   letter-spacing: -1px;
   cursor: pointer;
@@ -136,7 +136,7 @@
 /* Responsive */
 @media (max-width: 1024px) {
   .navbar {
-    padding: 16px 24px;
+    padding: 10px 24px;
   }
 
   .nav-menu {
