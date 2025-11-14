@@ -9,7 +9,7 @@ function App() {
       <Navbar />
 
       {/* Main Content */}
-      <div style={{ paddingTop: '125px', paddingBottom: '32px' }}>
+      <div className="main-content">
         <MovieRow title="Film Popolari" fetchMovies={getPopularMovies} />
         <MovieRow title="I Più Votati" fetchMovies={getTopRatedMovies} />
         <MovieRow title="In Tendenza" fetchMovies={getTrendingMovies} />

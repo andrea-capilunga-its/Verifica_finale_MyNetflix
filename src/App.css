@@ -8,3 +8,22 @@ body {
   overflow-x: hidden;
   width: 100%;
 }
+
+.main-content {
+  padding-top: 125px;
+  padding-bottom: 32px;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    padding-top: 80px;
+    padding-bottom: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .main-content {
+    padding-top: 70px;
+    padding-bottom: 16px;
+  }
+}
