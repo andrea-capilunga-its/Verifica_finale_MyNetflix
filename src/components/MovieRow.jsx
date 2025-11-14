@@ -32,7 +32,7 @@ const MovieRow = ({ title, fetchMovies }) => {
             />
             <div className="movie-info">
               <h3 className="movie-title">{movie.title}</h3>
-              <p className="movie-rating">★ {movie.vote_average.toFixed(1)}</p>
+              <p className="movie-rating">★{movie.vote_average.toFixed(1)}</p>
             </div>
           </div>
         ))}
