@@ -29,6 +29,7 @@ const MovieRow = ({ title, fetchMovies }) => {
   return (
     <div className="movie-row">
       <h2 className="row-title">{title}</h2>
+
       <div className="row-container">
         <button className="arrow-btn left" onClick={() => scroll('left')}>
           <img src={arrowIcon} alt="Scorri sinistra" className="arrow-icon left-arrow" />
