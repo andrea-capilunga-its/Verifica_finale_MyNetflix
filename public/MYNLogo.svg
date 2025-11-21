@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <linearGradient id="netflixGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#E50914;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#B20710;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background circle -->
+  <circle cx="60" cy="60" r="58" fill="url(#netflixGradient)" stroke="#000" stroke-width="2"/>
+
+  <!-- Letters MYN -->
+  <g fill="#fff" font-family="Arial, sans-serif" font-weight="bold" font-size="32">
+    <text x="60" y="72" text-anchor="middle">MYN</text>
+  </g>
+</svg>
