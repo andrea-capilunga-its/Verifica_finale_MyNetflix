@@ -14,11 +14,15 @@ const Navbar = ({ onSearch }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleLogoClick = () => {
+    onSearch('');
+  };
+
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
       <div className="navbar-container">
         {/* Logo MyNetflix */}
-        <div className="logo">
+        <div className="logo" onClick={handleLogoClick} style={{ cursor: 'pointer' }}>
           <span className="logo-my">MY</span>
           <span className="logo-netflix">NETFLIX</span>
         </div>
