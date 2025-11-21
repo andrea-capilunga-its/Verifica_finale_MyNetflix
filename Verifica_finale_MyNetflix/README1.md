@@ -28,6 +28,15 @@
   - `getMovieCredits(id)` - Cast del film
 
 #### FASE 4: Componenti Principali
+- ✅ **HeroBanner** - Banner principale homepage con:
+  - Film casuale in evidenza dai popolari
+  - Backdrop a tutto schermo con overlay gradiente
+  - Titolo, rating, anno e descrizione
+  - Pulsanti "Riproduci" e "Maggiori informazioni"
+  - Animazioni smooth (fade-in, slide-in)
+  - Responsive design completo
+  - Skeleton loading state
+
 - ✅ **Navbar** - Navigazione completa con:
   - Logo MyNetflix cliccabile
   - Menu navigazione (Home, La mia lista)
@@ -44,6 +53,7 @@
 
 #### FASE 5: Pagine
 - ✅ **Home** - Homepage con:
+  - Hero Banner con film in evidenza
   - 3 righe di film (Popolari, Più Votati, In Tendenza)
   - Risultati ricerca dinamici
 
@@ -73,7 +83,7 @@
 ## ❌ ANCORA DA IMPLEMENTARE
 
 ### FASE 7: Miglioramenti UX
-- ⏳ **Hero Banner** - Sezione hero in homepage con film in evidenza
+- ✅ **Hero Banner** - Sezione hero in homepage con film in evidenza
 - ⏳ **Loading States migliori** - Skeleton screens invece di spinner
 - ⏳ **Error Handling completo** - Messaggi errore + retry button
 - ⏳ **Placeholder Immagini** - Fallback per poster/backdrop mancanti
@@ -110,6 +120,7 @@ src/
 ├── api/
 │   └── tmdb.js              # Configurazione Axios + API calls
 ├── components/
+│   ├── HeroBanner.jsx       # Banner hero in evidenza
 │   ├── MovieRow.jsx         # Carosello film
 │   ├── Navbar.jsx           # Barra navigazione
 │   └── SearchBar.jsx        # Input ricerca
