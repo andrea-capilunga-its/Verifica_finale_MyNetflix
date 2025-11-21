@@ -1,25 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './SearchBar.css';
 
 const SearchBar = ({ onSearch }) => {
   const [query, setQuery] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
 
+  // Effettua la ricerca automaticamente dopo un breve ritardo (debounce)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      onSearch(query);
+    }, 300); // 300ms di ritardo per evitare troppe chiamate API
+
+    return () => clearTimeout(timer);
+  }, [query, onSearch]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (query.trim()) {
-      onSearch(query);
-    }
+    // Ora il submit non fa nulla perché la ricerca è automatica
   };
 
   const handleInputChange = (e) => {
     const newQuery = e.target.value;
     setQuery(newQuery);
-
-    // Se il testo viene cancellato completamente, torna alla homepage
-    if (newQuery.trim() === '') {
-      onSearch('');
-    }
   };
 
   const handleToggle = () => {
