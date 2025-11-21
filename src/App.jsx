@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { FavouritesProvider } from './context/FavouritesContext'
 import Navbar from './components/Navbar'
+import Footer from './components/Footer'
 import Home from './pages/Home'
 import MovieDetail from './pages/MovieDetail'
 import Favourites from './pages/Favourites'
@@ -24,6 +25,7 @@ function App() {
             <Route path="/movie/:id" element={<MovieDetail />} />
             <Route path="/favourites" element={<Favourites />} />
           </Routes>
+          <Footer />
         </div>
       </Router>
     </FavouritesProvider>
