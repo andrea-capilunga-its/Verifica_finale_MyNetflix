@@ -1,7 +1,10 @@
 import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { FavouritesProvider } from './context/FavouritesContext'
 import Navbar from './components/Navbar'
-import MovieRow from './components/MovieRow'
-import { getPopularMovies, getTopRatedMovies, getTrendingMovies, searchMovies } from './api/tmdb'
+import Home from './pages/Home'
+import MovieDetail from './pages/MovieDetail'
+import Favourites from './pages/Favourites'
 import './App.css'
 
 function App() {
@@ -12,26 +15,18 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-black">
-      <Navbar onSearch={handleSearch} />
-
-      {/* Main Content */}
-      <div className="main-content">
-        {searchQuery ? (
-          <MovieRow
-            title={`Risultati per: "${searchQuery}"`}
-            fetchMovies={() => searchMovies(searchQuery)}
-            key={searchQuery}
-          />
-        ) : (
-          <>
-            <MovieRow title="Film Popolari" fetchMovies={getPopularMovies} />
-            <MovieRow title="I Più Votati" fetchMovies={getTopRatedMovies} />
-            <MovieRow title="In Tendenza" fetchMovies={getTrendingMovies} />
-          </>
-        )}
-      </div>
-    </div>
+    <FavouritesProvider>
+      <Router>
+        <div className="min-h-screen bg-black">
+          <Navbar onSearch={handleSearch} />
+          <Routes>
+            <Route path="/" element={<Home searchQuery={searchQuery} />} />
+            <Route path="/movie/:id" element={<MovieDetail />} />
+            <Route path="/favourites" element={<Favourites />} />
+          </Routes>
+        </div>
+      </Router>
+    </FavouritesProvider>
   )
 }
 
