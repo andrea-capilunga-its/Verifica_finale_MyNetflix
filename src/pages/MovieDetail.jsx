@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { getMovieDetails, getMovieCredits } from '../api/tmdb';
 import { useFavourites } from '../context/FavouritesContext';
+import SkeletonMovieDetail from '../components/skeletons/SkeletonMovieDetail';
 import './MovieDetail.css';
 
 const MovieDetail = () => {
@@ -34,11 +35,7 @@ const MovieDetail = () => {
   }, [id]);
 
   if (loading) {
-    return (
-      <div className="loading-container">
-        <div className="loading-spinner"></div>
-      </div>
-    );
+    return <SkeletonMovieDetail />;
   }
 
   if (!movie) {
