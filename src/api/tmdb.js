@@ -19,5 +19,7 @@ export const searchMovies = (query) => tmdb.get('/search/movie', {
     query: query,
   }
 });
+export const getMovieDetails = (movieId) => tmdb.get(`/movie/${movieId}`);
+export const getMovieCredits = (movieId) => tmdb.get(`/movie/${movieId}/credits`);
 
 export default tmdb;
