@@ -14,5 +14,12 @@ const tmdb = axios.create({
 export const getPopularMovies = () => tmdb.get('/movie/popular');
 export const getTopRatedMovies = () => tmdb.get('/movie/top_rated');
 export const getTrendingMovies = () => tmdb.get('/trending/movie/week');
+export const searchMovies = (query) => tmdb.get('/search/movie', {
+  params: {
+    query: query,
+  }
+});
+export const getMovieDetails = (movieId) => tmdb.get(`/movie/${movieId}`);
+export const getMovieCredits = (movieId) => tmdb.get(`/movie/${movieId}/credits`);
 
 export default tmdb;

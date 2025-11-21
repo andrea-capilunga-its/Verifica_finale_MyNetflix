@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './MovieRow.css';
 import arrowIcon from '../assets/img/scroll-arrow-svgrepo-com.svg';
 
 const MovieRow = ({ title, fetchMovies }) => {
+  const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const rowRef = useRef(null);
 
@@ -26,6 +28,10 @@ const MovieRow = ({ title, fetchMovies }) => {
     rowRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
   };
 
+  const handleMovieClick = (movieId) => {
+    navigate(`/movie/${movieId}`);
+  };
+
   return (
     <div className="movie-row">
       <h2 className="row-title">{title}</h2>
@@ -36,7 +42,11 @@ const MovieRow = ({ title, fetchMovies }) => {
         </button>
         <div className="row-posters" ref={rowRef}>
           {movies.map((movie) => (
-            <div key={movie.id} className="movie-card">
+            <div
+              key={movie.id}
+              className="movie-card"
+              onClick={() => handleMovieClick(movie.id)}
+            >
               <img
                 src={`${IMAGE_BASE_URL}${movie.poster_path}`}
                 alt={movie.title}
