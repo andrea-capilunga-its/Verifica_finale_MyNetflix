@@ -12,6 +12,16 @@ const SearchBar = ({ onSearch }) => {
     }
   };
 
+  const handleInputChange = (e) => {
+    const newQuery = e.target.value;
+    setQuery(newQuery);
+
+    // Se il testo viene cancellato completamente, torna alla homepage
+    if (newQuery.trim() === '') {
+      onSearch('');
+    }
+  };
+
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
     if (isExpanded) {
@@ -37,7 +47,7 @@ const SearchBar = ({ onSearch }) => {
           <input
             type="text"
             value={query}
-            onChange={(e) => setQuery(e.target.value)}
+            onChange={handleInputChange}
             placeholder="Cerca film..."
             className="search-input"
             autoFocus
