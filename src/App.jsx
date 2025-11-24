@@ -6,6 +6,8 @@ import Footer from './components/Footer'
 import Home from './pages/Home'
 import MovieDetail from './pages/MovieDetail'
 import Favourites from './pages/Favourites'
+import About from './pages/About'
+import NotFound from './pages/NotFound'
 import './App.css'
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
             <Route path="/" element={<Home searchQuery={searchQuery} />} />
             <Route path="/movie/:id" element={<MovieDetail />} />
             <Route path="/favourites" element={<Favourites />} />
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
           <Footer />
         </div>
