@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import MovieRow from '../components/MovieRow';
 import { getPopularMovies, getTopRatedMovies, getTrendingMovies, searchMovies } from '../api/tmdb';
 

@@ -20,9 +20,18 @@ function App() {
     <FavouritesProvider>
       <Router>
         <div className="min-h-screen bg-black">
-          <Navbar onSearch={handleSearch} />
+          <Navbar
+            onSearch={handleSearch}
+          />
           <Routes>
-            <Route path="/" element={<Home searchQuery={searchQuery} />} />
+            <Route
+              path="/"
+              element={
+                <Home
+                  searchQuery={searchQuery}
+                />
+              }
+            />
             <Route path="/movie/:id" element={<MovieDetail />} />
             <Route path="/favourites" element={<Favourites />} />
             <Route path="*" element={<NotFound />} />
