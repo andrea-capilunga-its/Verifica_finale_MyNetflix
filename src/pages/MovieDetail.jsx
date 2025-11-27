@@ -3,6 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getMovieDetails, getMovieCredits } from '../api/tmdb';
 import { useFavourites } from '../context/FavouritesContext';
 import SkeletonMovieDetail from '../components/skeletons/SkeletonMovieDetail';
+import ErrorMessage from '../components/ErrorMessage';
+import ImageWithFallback from '../components/ImageWithFallback';
 import './MovieDetail.css';
 
 const MovieDetail = () => {
@@ -12,25 +14,27 @@ const MovieDetail = () => {
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const loadMovieData = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const [movieResponse, creditsResponse] = await Promise.all([
+        getMovieDetails(id),
+        getMovieCredits(id)
+      ]);
+
+      setMovie(movieResponse.data);
+      setCast(creditsResponse.data.cast.slice(0, 10));
+    } catch (error) {
+      setError('Impossibile caricare i dettagli del film. Verifica la tua connessione.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const loadMovieData = async () => {
-      try {
-        setLoading(true);
-        const [movieResponse, creditsResponse] = await Promise.all([
-          getMovieDetails(id),
-          getMovieCredits(id)
-        ]);
-
-        setMovie(movieResponse.data);
-        setCast(creditsResponse.data.cast.slice(0, 10));
-      } catch (error) {
-        console.error('Errore nel caricamento dei dettagli:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     loadMovieData();
   }, [id]);
 
@@ -38,8 +42,26 @@ const MovieDetail = () => {
     return <SkeletonMovieDetail />;
   }
 
+  if (error) {
+    return (
+      <div className="movie-detail-error">
+        <button className="back-btn" onClick={() => navigate(-1)}>
+          ← Indietro
+        </button>
+        <ErrorMessage message={error} onRetry={loadMovieData} />
+      </div>
+    );
+  }
+
   if (!movie) {
-    return <div className="error-message">Film non trovato</div>;
+    return (
+      <div className="movie-detail-error">
+        <button className="back-btn" onClick={() => navigate(-1)}>
+          ← Indietro
+        </button>
+        <ErrorMessage message="Film non trovato" onRetry={() => navigate('/')} />
+      </div>
+    );
   }
 
   const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/original';
@@ -65,7 +87,9 @@ const MovieDetail = () => {
       <div
         className="movie-backdrop"
         style={{
-          backgroundImage: `url(${IMAGE_BASE_URL}${movie.backdrop_path})`
+          backgroundImage: movie.backdrop_path
+            ? `url(${IMAGE_BASE_URL}${movie.backdrop_path})`
+            : 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)'
         }}
       >
         <div className="backdrop-overlay"></div>
@@ -73,10 +97,11 @@ const MovieDetail = () => {
 
       <div className="movie-content">
         <div className="movie-poster-section">
-          <img
-            src={`${POSTER_BASE_URL}${movie.poster_path}`}
+          <ImageWithFallback
+            src={movie.poster_path ? `${POSTER_BASE_URL}${movie.poster_path}` : null}
             alt={movie.title}
             className="detail-poster"
+            fallbackType="poster"
           />
         </div>
 

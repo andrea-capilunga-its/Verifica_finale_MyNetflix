@@ -1,0 +1,90 @@
+.image-fallback {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  color: #666;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.image-fallback::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(255, 255, 255, 0.02) 10px,
+      rgba(255, 255, 255, 0.02) 20px
+    );
+  pointer-events: none;
+}
+
+.fallback-icon {
+  margin-bottom: 10px;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.fallback-text {
+  font-size: 0.85rem;
+  font-weight: 500;
+  max-width: 80%;
+  word-wrap: break-word;
+  z-index: 1;
+  line-height: 1.4;
+}
+
+.image-skeleton {
+  position: relative;
+  background: linear-gradient(90deg, #1a1a1a 25%, #2d2d2d 50%, #1a1a1a 75%);
+  background-size: 200% 100%;
+  overflow: hidden;
+}
+
+.image-skeleton .shimmer {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+/* Poster fallback dimensions */
+.image-fallback.poster {
+  aspect-ratio: 2/3;
+}
+
+/* Backdrop fallback dimensions */
+.image-fallback.backdrop {
+  aspect-ratio: 16/9;
+}

@@ -87,13 +87,32 @@
   - Animazione shimmer effect per un feedback visivo professionale
   - Rimossi vecchi spinner in favore dei skeleton screens
 
+#### FASE 8: Error Handling e Image Fallbacks
+- ✅ **ErrorMessage** - Componente riutilizzabile per gestione errori
+  - Icona animata e messaggio personalizzabile
+  - Pulsante "Riprova" con retry automatico
+  - Animazioni (shake, rotate) per feedback visivo
+  - Design coerente con lo stile dell'app
+- ✅ **Error Handling completo** - Gestione errori API con retry in tutti i componenti
+  - `MovieRow` - Mostra ErrorMessage se fallisce il caricamento dei film con possibilità di retry
+  - `MovieDetail` - Gestisce errori di caricamento dettagli/cast con retry e pulsante indietro
+  - `HeroBanner` - Error state con retry se fallisce il caricamento del film in evidenza
+  - Messaggi di errore chiari e user-friendly
+- ✅ **ImageWithFallback** - Componente per gestione immagini con fallback
+  - Placeholder elegante per poster/backdrop mancanti
+  - Icone SVG personalizzate (poster/camera) con pattern di sfondo
+  - Skeleton loading durante caricamento immagine
+  - Gestione automatica errori (onError handler)
+  - Supporto per diversi tipi: "poster" e "backdrop"
+- ✅ **Placeholder Immagini** - Fallback implementato in tutti i componenti
+  - `MovieRow` - ImageWithFallback per ogni poster del carosello
+  - `MovieDetail` - Fallback per poster e backdrop del film
+  - `HeroBanner` - Gradiente di fallback per backdrop mancante
+  - `Favourites` - Placeholder per poster dei film salvati
+
 ---
 
 ## ❌ ANCORA DA IMPLEMENTARE
-
-### FASE 8: Miglioramenti UX Rimanenti
-- ⏳ **Error Handling completo** - Messaggi errore + retry button
-- ⏳ **Placeholder Immagini** - Fallback per poster/backdrop mancanti
 
 ### FASE 9: Custom Hooks (Opzionale)
 - ⏳ **useFetch** - Hook riutilizzabile per chiamate API
@@ -127,10 +146,14 @@ src/
 ├── api/
 │   └── tmdb.js              # Configurazione Axios + API calls
 ├── components/
-│   ├── HeroBanner.jsx       # Banner hero in evidenza
-│   ├── MovieRow.jsx         # Carosello film (con skeleton loading)
+│   ├── HeroBanner.jsx       # Banner hero in evidenza (con error handling)
+│   ├── MovieRow.jsx         # Carosello film (con skeleton loading ed error handling)
 │   ├── Navbar.jsx           # Barra navigazione
 │   ├── SearchBar.jsx        # Input ricerca
+│   ├── ErrorMessage.jsx     # Componente errore riutilizzabile con retry
+│   ├── ErrorMessage.css
+│   ├── ImageWithFallback.jsx # Componente immagine con fallback
+│   ├── ImageWithFallback.css
 │   └── skeletons/           # Componenti skeleton per loading states
 │       ├── SkeletonCard.jsx          # Card skeleton per MovieRow
 │       ├── SkeletonCard.css
@@ -140,8 +163,8 @@ src/
 │   └── FavouritesContext.jsx # Context API preferiti
 ├── pages/
 │   ├── Home.jsx             # Homepage
-│   ├── MovieDetail.jsx      # Dettaglio film (con skeleton loading)
-│   └── Favourites.jsx       # Lista preferiti
+│   ├── MovieDetail.jsx      # Dettaglio film (con skeleton, error handling, image fallback)
+│   └── Favourites.jsx       # Lista preferiti (con image fallback)
 └── App.jsx                  # Router principale
 ```
 
@@ -150,7 +173,8 @@ src/
 ## 🎯 Priorità Prossimi Steps
 1. ✅ ~~**Hero Banner**~~ - Completato
 2. ✅ ~~**Loading States**~~ - Completato (skeleton screens)
-3. **Error Handling** - Gestione errori API con retry
-4. **Placeholder Immagini** - Fallback per immagini mancanti
-5. **Pagina 404** - Not Found route
-6. **Testing e pulizia** - Console.log e testing finale
+3. ✅ ~~**Error Handling**~~ - Completato (gestione errori API con retry)
+4. ✅ ~~**Placeholder Immagini**~~ - Completato (fallback per immagini mancanti)
+5. **Custom Hooks** - useFetch, useLocalStorage (opzionale)
+6. **Pagina 404** - Not Found route
+7. **Testing e pulizia** - Console.log e testing finale
