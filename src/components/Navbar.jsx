@@ -42,6 +42,9 @@ const Navbar = ({ onSearch }) => {
           <li className={`nav-item ${location.pathname === '/favourites' ? 'active' : ''}`}>
             <Link to="/favourites">La mia lista</Link>
           </li>
+          <li className={`nav-item ${location.pathname === '/about' ? 'active' : ''}`}>
+            <Link to="/about">About</Link>
+          </li>
         </ul>
 
         {/* Right Side */}
