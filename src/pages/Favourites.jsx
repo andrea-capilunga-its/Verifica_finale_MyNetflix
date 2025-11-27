@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useFavourites } from '../context/FavouritesContext';
+import ImageWithFallback from '../components/ImageWithFallback';
 import './Favourites.css';
 
 const Favourites = () => {
@@ -46,10 +47,11 @@ const Favourites = () => {
             className="favourite-card"
             onClick={() => handleMovieClick(movie.id)}
           >
-            <img
-              src={`${IMAGE_BASE_URL}${movie.poster_path}`}
+            <ImageWithFallback
+              src={movie.poster_path ? `${IMAGE_BASE_URL}${movie.poster_path}` : null}
               alt={movie.title}
               className="favourite-poster"
+              fallbackType="poster"
             />
             <button
               className="remove-btn"

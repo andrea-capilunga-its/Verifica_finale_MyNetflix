@@ -1,28 +1,31 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getPopularMovies } from '../api/tmdb';
+import ErrorMessage from './ErrorMessage';
 import './HeroBanner.css';
 
 const HeroBanner = () => {
   const navigate = useNavigate();
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const loadFeaturedMovie = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await getPopularMovies();
+      const movies = response.data.results;
+      const randomMovie = movies[Math.floor(Math.random() * Math.min(5, movies.length))];
+      setMovie(randomMovie);
+    } catch (error) {
+      setError('Impossibile caricare il film in evidenza.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const loadFeaturedMovie = async () => {
-      try {
-        const response = await getPopularMovies();
-        const movies = response.data.results;
-        // Seleziona un film casuale tra i primi 5
-        const randomMovie = movies[Math.floor(Math.random() * Math.min(5, movies.length))];
-        setMovie(randomMovie);
-      } catch (error) {
-        console.error('Errore nel caricamento del film in evidenza:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     loadFeaturedMovie();
   }, []);
 
@@ -37,7 +40,7 @@ const HeroBanner = () => {
     }
   };
 
-  if (loading || !movie) {
+  if (loading) {
     return (
       <div className="hero-banner skeleton">
         <div className="hero-overlay"></div>
@@ -45,16 +48,32 @@ const HeroBanner = () => {
     );
   }
 
+  if (error) {
+    return (
+      <div className="hero-banner error">
+        <ErrorMessage message={error} onRetry={loadFeaturedMovie} />
+      </div>
+    );
+  }
+
+  if (!movie) {
+    return null;
+  }
+
   const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/original';
-  const backdropUrl = movie.backdrop_path
-    ? `${IMAGE_BASE_URL}${movie.backdrop_path}`
-    : `${IMAGE_BASE_URL}${movie.poster_path}`;
+  const backdropUrl = movie.backdrop_path || movie.poster_path
+    ? `${IMAGE_BASE_URL}${movie.backdrop_path || movie.poster_path}`
+    : null;
 
   return (
     <div className="hero-banner">
       <div
         className="hero-background"
-        style={{ backgroundImage: `url(${backdropUrl})` }}
+        style={{
+          backgroundImage: backdropUrl
+            ? `url(${backdropUrl})`
+            : 'linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%)'
+        }}
       ></div>
 
       <div className="hero-overlay"></div>

@@ -198,14 +198,13 @@
   font-size: 0.85rem;
 }
 
-.error-message {
+.movie-detail-error {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
-  font-size: 1.5rem;
   background-color: #141414;
+  padding: 20px;
 }
 
 @media (max-width: 768px) {
