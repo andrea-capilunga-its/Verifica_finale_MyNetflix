@@ -3,26 +3,30 @@ import { useNavigate } from 'react-router-dom';
 import './MovieRow.css';
 import arrowIcon from '../assets/img/scroll-arrow-svgrepo-com.svg';
 import SkeletonCard from './skeletons/SkeletonCard';
+import ErrorMessage from './ErrorMessage';
+import ImageWithFallback from './ImageWithFallback';
 
 const MovieRow = ({ title, fetchMovies }) => {
   const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const rowRef = useRef(null);
 
-  useEffect(() => {
-    const loadMovies = async () => {
-      try {
-        setLoading(true);
-        const response = await fetchMovies();
-        setMovies(response.data.results);
-      } catch (error) {
-        console.error('Errore nel caricamento dei film:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const loadMovies = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const response = await fetchMovies();
+      setMovies(response.data.results);
+    } catch (error) {
+      setError('Impossibile caricare i film. Verifica la tua connessione.');
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
     loadMovies();
   }, [fetchMovies]);
 
@@ -36,6 +40,15 @@ const MovieRow = ({ title, fetchMovies }) => {
   const handleMovieClick = (movieId) => {
     navigate(`/movie/${movieId}`);
   };
+
+  if (error) {
+    return (
+      <div className="movie-row">
+        <h2 className="row-title">{title}</h2>
+        <ErrorMessage message={error} onRetry={loadMovies} />
+      </div>
+    );
+  }
 
   return (
     <div className="movie-row">
@@ -55,10 +68,11 @@ const MovieRow = ({ title, fetchMovies }) => {
                 className="movie-card"
                 onClick={() => handleMovieClick(movie.id)}
               >
-                <img
-                  src={`${IMAGE_BASE_URL}${movie.poster_path}`}
+                <ImageWithFallback
+                  src={movie.poster_path ? `${IMAGE_BASE_URL}${movie.poster_path}` : null}
                   alt={movie.title}
                   className="movie-poster"
+                  fallbackType="poster"
                 />
                 <div className="movie-info">
                   <h3 className="movie-title">{movie.title}</h3>

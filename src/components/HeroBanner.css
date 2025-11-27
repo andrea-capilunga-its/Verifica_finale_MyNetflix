@@ -161,6 +161,14 @@
   animation: loading 1.5s ease-in-out infinite;
 }
 
+/* Error state */
+.hero-banner.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #141414;
+}
+
 @keyframes loading {
   0% {
     background-position: 200% 0;
