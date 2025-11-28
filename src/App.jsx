@@ -9,6 +9,7 @@ import './App.css'
 const Home = lazy(() => import('./pages/Home'))
 const MovieDetail = lazy(() => import('./pages/MovieDetail'))
 const Favourites = lazy(() => import('./pages/Favourites'))
+const About = lazy(() => import('./pages/About'))
 const NotFound = lazy(() => import('./pages/NotFound'))
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
               />
               <Route path="/movie/:id" element={<MovieDetail />} />
               <Route path="/favourites" element={<Favourites />} />
+              <Route path="/about" element={<About />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
