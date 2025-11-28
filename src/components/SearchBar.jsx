@@ -34,13 +34,15 @@ const SearchBar = ({ onSearch }) => {
 
   return (
     <div className="search-container">
-      <form onSubmit={handleSubmit} className={`search-form ${isExpanded ? 'expanded' : ''}`}>
+      <form onSubmit={handleSubmit} className={`search-form ${isExpanded ? 'expanded' : ''}`} role="search">
         <button
           type="button"
           className="search-icon-btn"
           onClick={handleToggle}
+          aria-label={isExpanded ? 'Chiudi ricerca' : 'Apri ricerca'}
+          aria-expanded={isExpanded}
         >
-          <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
           </svg>
         </button>
@@ -53,6 +55,7 @@ const SearchBar = ({ onSearch }) => {
             placeholder="Cerca film..."
             className="search-input"
             autoFocus
+            aria-label="Campo di ricerca film"
           />
         )}
       </form>
