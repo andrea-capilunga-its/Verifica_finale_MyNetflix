@@ -1,6 +1,6 @@
-# MyNetflix
+# MyNetflix 
 
-Un'applicazione web per esplorare film e serie TV, proprio come Netflix! Utilizza il database di The Movie Database (TMDb) per mostrarti migliaia di contenuti.
+Un'applicazione web per esplorare film e serie TV, proprio come Netflix! Utilizza il database di The Movie Database (TMDb) per mostrarti migliaia di contenuti. (https://github.com/andrea-capilunga-its/Verifica_finale_MyNetflix.git)
 
 ## Descrizione del progetto
 
@@ -85,19 +85,13 @@ L'app usa **The Movie Database**, un database gratuito con informazioni su film 
 
 ### Perché Context API invece di Redux?
 
-Ho scelto **Context API** per gestire lo stato dei preferiti per questi motivi:
+Abbiamo scelto **Context API** per gestire lo stato dei preferiti per questi motivi:
 
 **Vantaggi per questo progetto**:
 - **Più semplice**: Il progetto deve gestire solo la lista dei preferiti, non serve tutta la complessità di Redux
 - **Meno codice**: Circa il 70% di codice in meno rispetto a Redux
 - **Prestazioni ottime**: Con un solo context non ci sono rallentamenti
 - **Sufficiente**: Non servono funzionalità avanzate come middleware complessi o debug del tempo
-
-**Quando scegliere Redux invece**:
-- Quando hai molti stati da gestire (5 o più) che dipendono l'uno dall'altro
-- Quando ti servono funzionalità avanzate di debugging
-- Per progetti molto grandi con team numerosi
-- Quando hai bisogno di middleware complessi
 
 ### Perché queste librerie?
 
