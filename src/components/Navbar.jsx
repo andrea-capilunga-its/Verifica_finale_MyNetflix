@@ -36,9 +36,6 @@ const Navbar = ({ onSearch }) => {
           <li className={`nav-item ${location.pathname === '/' ? 'active' : ''}`}>
             <Link to="/">Home</Link>
           </li>
-          <li className="nav-item">Serie TV</li>
-          <li className="nav-item">Film</li>
-          <li className="nav-item">Nuovi e popolari</li>
           <li className={`nav-item ${location.pathname === '/favourites' ? 'active' : ''}`}>
             <Link to="/favourites">La mia lista</Link>
           </li>
