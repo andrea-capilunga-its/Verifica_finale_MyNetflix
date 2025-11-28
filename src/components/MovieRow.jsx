@@ -51,14 +51,18 @@ const MovieRow = ({ title, fetchMovies }) => {
   }
 
   return (
-    <div className="movie-row">
+    <div className="movie-row" role="region" aria-label={title}>
       <h2 className="row-title">{title}</h2>
 
       <div className="row-container">
-        <button className="arrow-btn left" onClick={() => scroll('left')}>
-          <img src={arrowIcon} alt="Scorri sinistra" className="arrow-icon left-arrow" />
+        <button
+          className="arrow-btn left"
+          onClick={() => scroll('left')}
+          aria-label={`Scorri ${title} a sinistra`}
+        >
+          <img src={arrowIcon} alt="" className="arrow-icon left-arrow" aria-hidden="true" />
         </button>
-        <div className="row-posters" ref={rowRef}>
+        <div className="row-posters" ref={rowRef} role="list">
           {loading ? (
             [...Array(8)].map((_, index) => <SkeletonCard key={index} />)
           ) : (
@@ -67,23 +71,32 @@ const MovieRow = ({ title, fetchMovies }) => {
                 key={movie.id}
                 className="movie-card"
                 onClick={() => handleMovieClick(movie.id)}
+                role="listitem"
+                tabIndex="0"
+                onKeyDown={(e) => e.key === 'Enter' && handleMovieClick(movie.id)}
+                aria-label={`${movie.title}, valutazione ${movie.vote_average.toFixed(1)} stelle`}
               >
                 <ImageWithFallback
                   src={movie.poster_path ? `${IMAGE_BASE_URL}${movie.poster_path}` : null}
-                  alt={movie.title}
+                  alt={`Poster di ${movie.title}`}
                   className="movie-poster"
                   fallbackType="poster"
+                  loading="lazy"
                 />
                 <div className="movie-info">
                   <h3 className="movie-title">{movie.title}</h3>
-                  <p className="movie-rating">★ {movie.vote_average.toFixed(1)}</p>
+                  <p className="movie-rating" aria-label={`Valutazione: ${movie.vote_average.toFixed(1)} su 10`}>★ {movie.vote_average.toFixed(1)}</p>
                 </div>
               </div>
             ))
           )}
         </div>
-        <button className="arrow-btn right" onClick={() => scroll('right')}>
-          <img src={arrowIcon} alt="Scorri destra" className="arrow-icon right-arrow" />
+        <button
+          className="arrow-btn right"
+          onClick={() => scroll('right')}
+          aria-label={`Scorri ${title} a destra`}
+        >
+          <img src={arrowIcon} alt="" className="arrow-icon right-arrow" aria-hidden="true" />
         </button>
       </div>
     </div>
