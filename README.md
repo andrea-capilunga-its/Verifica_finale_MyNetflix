@@ -262,6 +262,4 @@ L'applicazione utilizza [The Movie Database (TMDb) API](https://www.themoviedb.o
 - Safari (ultime 2 versioni)
 - Edge (ultime 2 versioni)
 
-## Licenza
 
-Progetto educativo - Tutti i diritti riservati
