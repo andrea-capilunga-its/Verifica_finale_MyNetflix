@@ -1,142 +1,267 @@
-# Verifica_finale_MyNetflix
+# MyNetflix
 
-Progetto SPA React - Requisiti e Consegna
-📋 Informazioni Generali
-Descrizione
-Creazione di una Single Page Application (SPA) utilizzando React, React Router e API esterne. È possibile utilizzare Redux, ma non è obbligatorio: sarà vostra cura valutare se sia necessario o se invece sia sufficiente la Context API
+Un'applicazione web moderna che consente di esplorare film e serie TV utilizzando l'API di The Movie Database (TMDb).
 
-Opzione A: Netflix Clone (Progetto Guidato) 📺
-Creazione di una SPA in stile Netflix, utilizzando le API di The Movie Database (TMDB).
+## Descrizione
 
-L'app permetterà agli utenti di:
+MyNetflix è una Single Page Application (SPA) sviluppata in React che offre:
+- Navigazione e ricerca di film e serie TV
+- Dettagli completi di ogni titolo con cast e valutazioni
+- Sistema di preferiti per salvare i propri titoli preferiti
+- Interfaccia responsive e accessibile
+- Gestione errori con messaggi informativi
+- Skeleton loading per una migliore UX
+- Lazy loading delle immagini per ottimizzare le performance
 
-Esplorare film e serie TV;
-visualizzare i dettagli di ciascun contenuto;
-cercare contenuti specifici;
-gestire una lista personale di preferiti.
-Funzionalità specifiche richieste
-Homepage
+## Tecnologie Utilizzate
 
-Visualizzazione di almeno 2-3 categorie (es. film popolari, top rated, in tendenza) come liste;
-banner hero con un film in evidenza.
-Ricerca
+### Framework e Librerie Core
 
-Barra di ricerca nella navbar;
-pagina dedicata con i risultati di ricerca.
-Pagina dettaglio
+#### React (v19.2.0)
+Libreria JavaScript per la costruzione di interfacce utente.
+- **Perché**: Permette di creare componenti riutilizzabili e gestire lo stato dell'applicazione in modo efficiente
+- **Utilizzo**: Base dell'intera applicazione, gestione componenti e stato
 
-Informazioni complete: poster, titolo, descrizione, valutazione, data di uscita, lista dei generi;
-cast principale;
-pulsante per aggiungere il contenuto ai preferiti.
-Lista dei preferiti
+#### React Router DOM (v7.9.5)
+Libreria per il routing lato client in applicazioni React.
+- **Perché**: Gestisce la navigazione tra le diverse pagine (Home, Dettaglio Film, Preferiti, About) senza ricaricare la pagina
+- **Utilizzo**: Routing delle pagine, navigazione SPA, gestione URL dinamici
 
-Pagina dedicata ai contenuti salvati;
-persistenza dei dati con localStorage;
-possibilità di rimuovere elementi dalla lista;
-indicatore nella navbar con il numero dei preferiti.
-Navigazione
+### Librerie di Utilità
 
-Navbar con: Home, Film, Serie TV, Ricerca, Preferiti;
-routing tra le pagine con React Router.
+#### Axios (v1.13.2)
+Client HTTP basato su Promise per browser e Node.js.
+- **Perché**: Semplifica le chiamate API a TMDb con una sintassi più pulita rispetto a fetch, gestione automatica JSON e migliore gestione errori
+- **Utilizzo**: Tutte le chiamate API per recuperare dati di film e serie TV
 
-REQUISITI TECNICI OBBLIGATORI
+#### React Icons (v5.5.0)
+Collezione di icone popolari come componenti React.
+- **Perché**: Fornisce icone vettoriali scalabili (SVG) senza dover importare font o immagini separate
+- **Utilizzo**: Icone nella UI (cuore per preferiti, stelle per valutazioni, menu hamburger, ecc.)
 
-Props, State, Lifecycle e Hooks
- Props : passaggio di dati tra componenti parent-child in modo appropriato
- useState : gestione dello stato locale 
- useEffect 
-Chiamate API
-Sincronizzazione con localStorage
-Cleanup (rimozione event listener, timeout, cancellazione fetch, ecc.)
- Custom Hook: creazione di almeno 1 custom hook riutilizzabile
-Esempi: useFetch, useLocalStorage, useAuth, useForm
+### Styling
 
-Gestione dello Stato Globale
-Scegliere UNA delle due opzioni (la scelta non influisce sul voto, ma va motivata nel README):
+#### Tailwind CSS (v4.1.17)
+Framework CSS utility-first per creare interfacce personalizzate rapidamente.
+- **Perché**: Permette di scrivere CSS direttamente nel markup con classi utility, riducendo il CSS custom e migliorando la consistenza del design
+- **Utilizzo**: Tutto lo styling dell'applicazione (layout, responsive, colori, spaziature)
 
-Opzione A: Context API
- Creazione di almeno 1 Context
- Provider configurato a livello di <App />
- Consumo del context in almeno 2 componenti diversi tramite useContext
+#### Autoprefixer (v10.4.21)
+Plugin PostCSS per aggiungere automaticamente prefissi vendor ai CSS.
+- **Perché**: Garantisce compatibilità cross-browser aggiungendo automaticamente prefissi CSS necessari
+- **Utilizzo**: Integrato con Tailwind CSS per supporto browser ottimale
 
- Gestione dello Stato Globale
-Scegliere UNA delle due opzioni (la scelta non influisce sul voto, ma va motivata nel README):
+### Build Tools
 
-Opzione A: Context API
- Creazione di almeno 1 Context
- Provider configurato a livello di <App />
- Consumo del context in almeno 2 componenti diversi tramite useContext
+#### Vite (v7.2.2)
+Build tool e dev server di nuova generazione.
+- **Perché**: Offre hot reload istantaneo in sviluppo e build ottimizzati per produzione, molto più veloce di Webpack
+- **Utilizzo**: Server di sviluppo e build di produzione
 
- Componenti e Struttura del Progetto
-L'app deve essere suddivisa in componenti riutilizzabili e ben organizzati
+#### @vitejs/plugin-react (v5.1.0)
+Plugin ufficiale Vite per supporto React.
+- **Perché**: Abilita Fast Refresh di React e ottimizzazioni specifiche per React in Vite
+- **Utilizzo**: Integrazione React con Vite
 
+### Development Tools
 
- Componenti riutilizzabili: componenti usati in più parti dell'app
- Single Responsibility: ogni componente ha una singola responsabilità chiara
- Struttura cartelle organizzata e logica
-La struttura delle cartelle è a vostra discrezione, ma deve rispettare i principi di:
+#### ESLint (v9.39.1)
+Tool per identificare e correggere problemi nel codice JavaScript.
+- **Perché**: Mantiene qualità e consistenza del codice, identifica bug potenziali e applica best practices
+- **Utilizzo**: Linting del codice durante sviluppo
 
-Single responsibility: ogni componente una responsabilità
-Riutilizzabilità: componenti utilizzabili in più contesti
-Organizzazione logica: file raggruppati in modo coerente
-🛣️ React Router - Routing e Navigazione
-Route minime richieste
- / - Homepage
- /lista - Pagina con lista di elementi (prodotti, film, articoli, ecc.)
- /dettaglio/:id - Pagina dettaglio con route dinamica
- /ricerca o /ricerca?q=... - Pagina risultati di ricerca
- /preferiti (o /salvati, /carrello) - Lista personale con persistenza
- /about (o altra pagina informativa)
- * - Pagina 404 per gestire route inesistenti
-Per il progetto Netflix: /, /movies, /tv, /movie/:id, /tv/:id, /search, /favourites, 
+#### eslint-plugin-react-hooks (v5.2.0)
+Plugin ESLint per verificare le regole degli Hooks di React.
+- **Perché**: Garantisce che gli Hooks siano usati correttamente secondo le regole di React
+- **Utilizzo**: Validazione corretta usage di useState, useEffect, custom hooks
 
-Funzionalità routing obbligatorie
- Layout condiviso con <Outlet /> per header/footer persistenti
- NavLink con classe/stile attivo per indicare la pagina corrente
- Navigazione programmatica con useNavigate (almeno 1 utilizzo) Esempio: redirect dopo login, dopo salvataggio, ecc.
- useParams per leggere parametri dinamici dalle route
- useLocation o useSearchParams per gestire query string nella ricerca
-🔌 Consumo di Dati e API
- API esterna: consumo di almeno una API esterna (REST)
-Per Netflix: TMDB API
-Per progetti personali: scegliere API pubbliche appropriate (confrontarsi con docente)
- Chiamate API: fetch in almeno 3 punti diversi dell'app
- Loading state: indicatori di caricamento visibili durante le chiamate
- Error handling: gestione degli errori con messaggi chiari all'utente
-Messaggi di errore, possibilità di retry, fallback appropriati
- Persistenza dati: utilizzo di localStorage per salvare:Preferiti/carrello/lista salvata,  Preferenze utente (tema, lingua, ecc.)
- Performance : chiamate API ottimizzateEvitare chiamate ridondanti. 
+#### eslint-plugin-react-refresh (v0.4.24)
+Plugin ESLint per React Fast Refresh.
+- **Perché**: Assicura che i componenti siano compatibili con Fast Refresh durante lo sviluppo
+- **Utilizzo**: Validazione pattern compatibili con hot reload
 
-Le API devono essere utilizzate in modo efficiente, pensando sia alle performance che alla user experience.
+## Scelte Tecniche
 
-Stili e UI/UX
-Tecnologia CSS (scegliere UNA)
- CSS puro / CSS Modules
- Styled Components
- Tailwind CSS
- SCSS
-Requisiti design obbligatori
- Responsive design
- Coerenza visiva :
- Stati interattivi: hover states su bottoni, link, card
- Indicatori di caricamento: feedback durante operazioni asincrone
- Gestione immagini: placeholder/fallback se immagine mancante o in errore
-Il layout deve essere gradevole, usabile e professionale.
+### Gestione dello Stato Globale: Context API
+Ho scelto di utilizzare la **Context API** invece di Redux per i seguenti motivi:
+- **Semplicità**: Il progetto richiede solo la gestione dei preferiti, non necessita della complessità di Redux
+- **Performance**: Con un solo context (FavouritesContext), le performance sono ottime
+- **Meno boilerplate**: Context API richiede molto meno codice rispetto a Redux
+- **Sufficiente per lo scope**: Non abbiamo bisogno di middleware complessi, time-travel debugging o gestione di uno stato molto complesso
 
-💻 Qualità del Codice e Best Practices
- Codice pulito:
-Indentazione corretta;
-no console.log lasciati per debug.
- Naming convention coerente:
-Scegliere italiano O inglese (non misto);
-nomi di variabili/funzioni descrittivi;
-convenzioni React (componenti PascalCase, funzioni camelCase).
-Console pulita:
-No errori in console;
-no warning non gestiti.
- Commenti appropriati:
-Commenti dove la logica è complessa;
-documentazione delle scelte tecniche non ovvie.
- Gestione credenziali:
-File .env per chiavi API (non committare chiavi) se necessario;
-.env.example con struttura delle variabili.
+### Custom Hooks Implementati
+- **Custom logic per gestione preferiti**: Implementato all'interno di FavouritesContext con persistenza localStorage
+- **Error handling e loading states**: Implementati nelle varie pagine per gestire chiamate API
+
+## Installazione
+
+```bash
+# Clona il repository
+git clone <repository-url>
+
+# Entra nella directory
+cd MyNetflix
+
+# Installa le dipendenze
+npm install
+
+# Avvia il server di sviluppo
+npm run dev
+```
+
+## Script Disponibili
+
+- `npm run dev` - Avvia il server di sviluppo
+- `npm run build` - Crea la build di produzione
+- `npm run preview` - Preview della build di produzione
+- `npm run lint` - Esegue il linting del codice
+
+## Struttura del Progetto
+
+```
+MyNetflix/
+├── src/
+│   ├── components/       # Componenti riutilizzabili
+│   │   ├── skeletons/   # Skeleton loaders
+│   │   │   ├── SkeletonCard.jsx
+│   │   │   └── SkeletonMovieDetail.jsx
+│   │   ├── ErrorMessage.jsx
+│   │   ├── Footer.jsx
+│   │   ├── HeroBanner.jsx
+│   │   ├── ImageWithFallback.jsx
+│   │   ├── MovieRow.jsx
+│   │   ├── Navbar.jsx
+│   │   └── SearchBar.jsx
+│   ├── context/         # Context API per stato globale
+│   │   └── FavouritesContext.jsx
+│   ├── pages/           # Pagine dell'applicazione
+│   │   ├── About.jsx
+│   │   ├── Favourites.jsx
+│   │   ├── Home.jsx
+│   │   ├── MovieDetail.jsx
+│   │   └── NotFound.jsx
+│   ├── App.jsx          # Componente root con routing
+│   └── main.jsx         # Entry point
+├── public/              # Asset statici
+└── index.html           # HTML template
+```
+
+## Funzionalità Principali
+
+### Homepage
+- Visualizzazione di 4 categorie: Film Popolari, Film Top Rated, Serie TV Popolari, Serie TV Top Rated
+- Hero banner con film in evidenza
+- Interfaccia responsive con skeleton loading
+
+### Ricerca
+- Barra di ricerca nella navbar
+- Risultati di ricerca in tempo reale
+- Gestione dello stato vuoto e degli errori
+
+### Pagina Dettaglio
+- Informazioni complete: poster, titolo, descrizione, valutazione, data di uscita, generi
+- Cast principale con immagini
+- Pulsante per aggiungere/rimuovere dai preferiti
+- Skeleton loading durante il caricamento
+
+### Lista dei Preferiti
+- Pagina dedicata ai contenuti salvati
+- Persistenza con localStorage
+- Possibilità di rimuovere elementi
+- Indicatore nella navbar con numero di preferiti
+- Gestione stato vuoto
+
+### Navigazione
+- Navbar con: Home, Preferiti, About
+- Routing con React Router
+- NavLink con stile attivo
+- Pagina 404 per route inesistenti
+- Footer persistente
+
+### Caratteristiche Tecniche
+- **Responsive Design**: Layout ottimizzato per desktop, tablet e mobile
+- **Accessibilità**: Navigazione da tastiera, ARIA labels, testi alternativi
+- **Performance**:
+  - Lazy loading delle immagini con Intersection Observer
+  - Skeleton loading per feedback visivo
+  - Gestione efficiente delle chiamate API
+- **Error Handling**: Gestione errori API con messaggi informativi e componenti dedicati
+- **Image Fallback**: Placeholder per immagini mancanti o in errore
+- **Loading States**: Indicatori di caricamento in tutte le operazioni asincrone
+
+## Requisiti Tecnici Implementati
+
+### Props, State, Lifecycle e Hooks
+- **Props**: Passaggio dati tra componenti parent-child (MovieRow, MovieCard, ecc.)
+- **useState**: Gestione stato locale in tutti i componenti
+- **useEffect**:
+  - Chiamate API
+  - Sincronizzazione con localStorage
+  - Intersection Observer per lazy loading
+  - Cleanup appropriati
+
+### Gestione dello Stato Globale
+- **Context API**: FavouritesContext per gestione preferiti
+- **Provider**: Configurato in App.jsx
+- **useContext**: Consumato in Navbar, MovieDetail, Favourites, MovieRow
+
+### Componenti
+- **Componenti riutilizzabili**: MovieRow, ErrorMessage, ImageWithFallback, SkeletonCard, ecc.
+- **Single Responsibility**: Ogni componente ha una responsabilità specifica
+- **Struttura organizzata**: Separazione tra components, pages, context
+
+### React Router
+- Route implementate: `/`, `/favourites`, `/movie/:id`, `/tv/:id`, `/about`, `*` (404)
+- Layout condiviso con Navbar e Footer
+- NavLink con classe attiva
+- useNavigate per navigazione programmatica
+- useParams per route dinamiche
+- useLocation per gestione stato
+
+### Consumo API
+- **API esterna**: TMDb API
+- **Chiamate API**: In Home, MovieDetail, SearchBar
+- **Loading state**: Skeleton loaders in tutte le pagine
+- **Error handling**: Componente ErrorMessage dedicato
+- **Persistenza**: localStorage per preferiti
+- **Performance**: Evitate chiamate ridondanti
+
+### Stili e UI/UX
+- **Tailwind CSS**: Per tutto lo styling
+- **Responsive design**: Mobile-first approach
+- **Coerenza visiva**: Design system consistente
+- **Stati interattivi**: Hover, focus, active states
+- **Indicatori caricamento**: Skeleton loaders
+- **Gestione immagini**: ImageWithFallback component con placeholder
+
+### Qualità del Codice
+- **Codice pulito**: Indentazione corretta, no console.log
+- **Naming convention**: Inglese consistente, PascalCase per componenti
+- **Console pulita**: No errori o warning
+- **Commenti**: Dove necessario per logica complessa
+
+## API
+
+L'applicazione utilizza [The Movie Database (TMDb) API](https://www.themoviedb.org/documentation/api) per recuperare i dati sui film e serie TV.
+
+### Endpoint utilizzati:
+- `/movie/popular` - Film popolari
+- `/movie/top_rated` - Film top rated
+- `/tv/popular` - Serie TV popolari
+- `/tv/top_rated` - Serie TV top rated
+- `/movie/{id}` - Dettaglio film
+- `/tv/{id}` - Dettaglio serie TV
+- `/movie/{id}/credits` - Cast film
+- `/tv/{id}/credits` - Cast serie TV
+- `/search/multi` - Ricerca globale
+
+## Browser Supportati
+
+- Chrome (ultime 2 versioni)
+- Firefox (ultime 2 versioni)
+- Safari (ultime 2 versioni)
+- Edge (ultime 2 versioni)
+
+## Licenza
+
+Progetto educativo - Tutti i diritti riservati
