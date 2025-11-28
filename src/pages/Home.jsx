@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import HeroBanner from '../components/HeroBanner';
 import MovieRow from '../components/MovieRow';
+import HeroBanner from '../components/HeroBanner';
 import { getPopularMovies, getTopRatedMovies, getTrendingMovies, searchMovies } from '../api/tmdb';
 
 const Home = ({ searchQuery }) => {
